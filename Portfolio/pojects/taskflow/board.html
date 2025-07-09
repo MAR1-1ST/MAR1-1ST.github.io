@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Board - TaskFlow</title>
+    <link rel="stylesheet" href="../taskflow/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1a2a1920a2.js" crossorigin="anonymous"></script>
+</head>
+<body data-theme="light">
+    <div class="app-layout">
+        <aside class="sidebar">
+             <div class="sidebar-header">
+                <i class="fas fa-stream logo"></i>
+                <h1>TaskFlow</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
+                <a href="board.html" class="nav-item active"><i class="fas fa-th-large"></i> Projects</a>
+                <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i> Settings</a>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+             <header class="navbar">
+                <h2 class="page-title">Website Redesign</h2>
+                <div class="navbar-right">
+                    <button class="btn"><i class="fas fa-edit"></i> Edit Board</button>
+                    <img src="https://i.pravatar.cc/40?u=user1" alt="User Avatar" class="user-avatar">
+                </div>
+            </header>
+            
+            <main class="kanban-board">
+                <div class="kanban-column">
+                    <h3 class="column-title">📝 To Do</h3>
+                    <div class="task-card" data-task-id="1">
+                        <h5>Design Final Logo</h5>
+                        <div class="task-meta">
+                            <span class="task-label priority-high">High Priority</span>
+                            <img src="https://i.pravatar.cc/24?u=user2" class="task-avatar" title="Casey">
+                        </div>
+                    </div>
+                     <div class="task-card" data-task-id="2">
+                        <h5>Wireframe About Page</h5>
+                         <div class="task-meta">
+                            <span class="task-label priority-low">Low Priority</span>
+                            <img src="https://i.pravatar.cc/24?u=user3" class="task-avatar" title="Sam">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kanban-column">
+                    <h3 class="column-title">🚧 In Progress</h3>
+                    <div class="task-card" data-task-id="3">
+                        <h5>Develop Homepage UI</h5>
+                        <div class="task-meta">
+                            <span class="task-label category-dev">Development</span>
+                            <span class="task-due-date"><i class="far fa-calendar-alt"></i> Jul 15</span>
+                            <img src="https://i.pravatar.cc/24?u=user3" class="task-avatar" title="Sam">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="kanban-column">
+                    <h3 class="column-title">🕵️ Review</h3>
+                    <div class="task-card" data-task-id="4">
+                        <h5>Review User Personas</h5>
+                        <div class="task-meta">
+                            <span class="task-label category-research">Research</span>
+                            <img src="https://i.pravatar.cc/24?u=user1" class="task-avatar" title="Alex">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="kanban-column">
+                    <h3 class="column-title">✅ Done</h3>
+                     <div class="task-card" data-task-id="5">
+                        <h5>Project Kick-off Meeting</h5>
+                         <div class="task-meta">
+                            <span class="task-due-date"><i class="far fa-calendar-alt"></i> Jul 1</span>
+                            <img src="https://i.pravatar.cc/24?u=user1" class="task-avatar" title="Alex">
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <div class="modal" id="task-modal">
+        <div class="modal-content">
+            <span class="close-modal-btn">&times;</span>
+            <h3>Develop Homepage UI</h3>
+            <p><strong>Description:</strong> Code the HTML and CSS for the new homepage based on the approved Figma designs.</p>
+            <p><strong>Assigned to:</strong> Sam</p>
+            <p><strong>Due Date:</strong> July 15, 2025</p>
+            <div class="comment-section">
+                <h4>Comments</h4>
+                <p><strong>Alex:</strong> Looks great so far! Just make sure it's responsive.</p>
+            </div>
+            <div class="modal-actions">
+                 <button class="btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../taskflow/js/demo.js"></script>
+</body>
+</html>

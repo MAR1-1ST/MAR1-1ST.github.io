@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - TaskFlow</title>
+    <link rel="stylesheet" href="../taskflow/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1a2a1920a2.js" crossorigin="anonymous"></script>
+</head>
+<body data-theme="light">
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-stream logo"></i>
+                <h1>TaskFlow</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
+                <a href="board.html" class="nav-item"><i class="fas fa-th-large"></i> Projects</a>
+                <a href="settings.html" class="nav-item active"><i class="fas fa-cog"></i> Settings</a>
+            </nav>
+        </aside>
+        
+        <div class="main-content">
+             <header class="navbar">
+                <h2 class="page-title">Settings</h2>
+                 <div class="navbar-right">
+                    <img src="https://i.pravatar.cc/40?u=user1" alt="User Avatar" class="user-avatar">
+                </div>
+            </header>
+
+            <main class="page-content">
+                <div class="settings-card">
+                    <h3>Profile</h3>
+                    <div class="input-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" value="Alex Johnson">
+                    </div>
+                    <div class="input-group">
+                        <label for="email-settings">Email</label>
+                        <input type="email" id="email-settings" value="alex.j@example.com">
+                    </div>
+                     <button class="btn btn-primary">Save Changes</button>
+                </div>
+
+                 <div class="settings-card">
+                    <h3>Appearance</h3>
+                    <div class="setting-item">
+                        <span>Dark Mode</span>
+                        <label class="switch">
+                            <input type="checkbox" id="theme-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-card">
+                    <h3>Data Management</h3>
+                     <button class="btn btn-danger">Reset All Data</button>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <script src="../taskflow/js/demo.js"></script>
+</body>
+</html>

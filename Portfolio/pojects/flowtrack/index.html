@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects - FlowTrack</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <i class="fas fa-tasks logo-icon"></i>
+                <h1>FlowTrack</h1>
+            </div>
+            <div class="header-right">
+                <button id="theme-switcher" class="theme-btn">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="profile">
+                    <span>Alex Johnson</span>
+                    <img src="https://i.pravatar.cc/40?u=alex" alt="Avatar">
+                </div>
+            </div>
+        </header>
+
+        <main class="dashboard-content">
+            <div class="dashboard-header">
+                <h2>My Projects</h2>
+                <button id="new-project-btn" class="btn btn-primary"><i class="fas fa-plus"></i> New Project</button>
+            </div>
+            <div id="projects-grid" class="projects-grid">
+                </div>
+        </main>
+    </div>
+
+    <div id="new-project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h3>Create a New Project</h3>
+            <div class="input-group">
+                <label for="project-name">Project Name</label>
+                <input type="text" id="project-name" placeholder="e.g., Q3 Marketing Campaign">
+            </div>
+            <button id="create-project-btn" class="btn btn-primary btn-full">Create Project</button>
+        </div>
+    </div>
+
+    <script src="../flowtrack/js/dragdrop.js"></script>
+    <script src="../flowtrack/js/main.js"></script>
+</body>
+</html>

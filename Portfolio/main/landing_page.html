@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevFolio - Developer Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Styles and Animations -->
+    <style>
+        /* Base font and dark mode setup */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .dark {
+            color-scheme: dark;
+        }
+
+        /* Typewriter cursor effect */
+        .typewriter-text::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { color: transparent }
+            50% { color: inherit }
+        }
+
+        /* Hero section scroll-down indicator animation */
+        @keyframes scroll-down {
+            0% { transform: translateY(-10px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(10px); opacity: 0; }
+        }
+        .animate-scroll-down {
+            animation: scroll-down 2s infinite;
+        }
+
+        /* General scroll-triggered fade-in-up animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animate-fade-in-up {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal animations */
+        @keyframes fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-fade-in {
+            animation: fade-in 0.3s ease-out forwards;
+        }
+        @keyframes zoom-in {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .animate-zoom-in {
+            animation: zoom-in 0.3s ease-out forwards;
+        }
+    </style>
+    
+    <!-- Theme loader script to prevent FOUC (Flash of Unstyled Content) -->
+    <script>
+        // Immediately set theme from localStorage to avoid flashing
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-gray-900 font-sans text-gray-800 dark:text-gray-200 transition-colors duration-300">
+
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-white dark:bg-gray-900 flex items-center justify-center z-[200]">
+        <div class="w-16 h-16 border-4 border-t-blue-500 border-gray-200 dark:border-gray-600 rounded-full animate-spin"></div>
+    </div>
+
+    <!-- Main Content (hidden until loaded) -->
+    <div id="main-content" class="opacity-0 transition-opacity duration-500">
+        <!-- Navbar -->
+        <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+            <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#home" class="text-2xl font-bold text-gray-800 dark:text-white">DevFolio</a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="#home" class="nav-link relative text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">Home</a>
+                    <a href="#about" class="nav-link relative text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">About</a>
+                    <a href="#services" class="nav-link relative text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">Services</a>
+                    <a href="#portfolio" class="nav-link relative text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">Portfolio</a>
+                    <a href="#contact" class="nav-link relative text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400">Contact</a>
+                    <button id="theme-toggle" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Toggle dark mode">
+                        <!-- Sun/Moon Icon will be injected by JS -->
+                    </button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="theme-toggle-mobile" class="p-2 mr-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Toggle dark mode">
+                        <!-- Sun/Moon Icon will be injected by JS -->
+                    </button>
+                    <button id="mobile-menu-button" class="text-gray-800 dark:text-white" aria-label="Open menu">
+                        <!-- Menu/X Icon will be injected by JS -->
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900 py-4">
+                <a href="#home" class="mobile-nav-link block text-center py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Home</a>
+                <a href="#about" class="mobile-nav-link block text-center py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">About</a>
+                <a href="#services" class="mobile-nav-link block text-center py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Services</a>
+                <a href="#portfolio" class="mobile-nav-link block text-center py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Portfolio</a>
+                <a href="#contact" class="mobile-nav-link block text-center py-2 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
+            </div>
+        </nav>
+
+        <main>
+            <!-- Home Section -->
+            <section id="home" class="h-screen flex items-center justify-center relative bg-cover bg-center bg-fixed" style="background-image: url('https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?q=80&w=2070&auto=format&fit=crop')">
+                <div class="absolute inset-0 bg-black/60"></div>
+                <div class="relative z-10 text-center text-white p-4">
+                    <h1 id="typewriter" class="text-4xl md:text-6xl font-bold mb-4"></h1>
+                    <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto">I craft beautiful and functional digital experiences. Let's build something amazing together.</p>
+                    <a href="#contact" class="group relative inline-block px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:scale-105">
+                        <span class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                        <span class="relative z-10">Get In Touch</span>
+                    </a>
+                </div>
+                <div class="absolute bottom-10 left-1/2 -translate-x-1/2">
+                    <div class="w-6 h-10 border-2 border-white rounded-full flex justify-center items-start p-1">
+                        <div class="w-1 h-2 bg-white rounded-full animate-scroll-down"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="py-20 bg-gray-50 dark:bg-gray-800">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white scroll-animate">About Me</h2>
+                    <div class="flex flex-col md:flex-row items-center gap-12">
+                        <div class="md:w-1/3 scroll-animate">
+                            <img src="WhatsApp Image 2025-07-09 at 13.20.30_ba502914.jpg" alt="Profile" class="rounded-full shadow-lg mx-auto" loading="lazy" />
+                        </div>
+                        <div class="md:w-2/3 scroll-animate">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 dark:text-white">Crafting Digital Solutions</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">Hello! I'm a passionate developer with a knack for building elegant and efficient web applications. With a strong foundation in modern web technologies, I focus on creating seamless user experiences and robust backend systems.</p>
+                            <p class="text-gray-600 dark:text-gray-300">My journey in tech has been driven by a constant curiosity and a desire to solve complex problems. I thrive in collaborative environments and am always eager to learn new skills and technologies.</p>
+                        </div>
+                    </div>
+                    <div class="mt-20 scroll-animate">
+                        <h3 class="text-2xl font-bold text-center mb-8 text-gray-800 dark:text-white">My Skills</h3>
+                        <div id="skills-container" class="flex flex-wrap justify-center gap-4">
+                            <!-- Skills will be injected by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services" class="py-20 bg-white dark:bg-gray-900">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white scroll-animate">Services I Offer</h2>
+                    <div id="services-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Services will be injected by JS -->
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Portfolio Section -->
+            <section id="portfolio" class="py-20 bg-gray-50 dark:bg-gray-800">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-8 text-gray-800 dark:text-white scroll-animate">My Portfolio</h2>
+                    <div id="portfolio-filters" class="flex justify-center flex-wrap gap-2 mb-12 scroll-animate">
+                        <!-- Filter buttons will be injected by JS -->
+                    </div>
+                    <div id="portfolio-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Portfolio items will be injected by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section id="contact" class="py-20 bg-white dark:bg-gray-900">
+                <div class="container mx-auto px-6">
+                    <h2 class="text-3xl font-bold text-center mb-12 text-gray-800 dark:text-white scroll-animate">Contact Me</h2>
+                    <div class="max-w-2xl mx-auto bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-lg scroll-animate">
+                        <form id="contact-form">
+                            <div class="mb-4">
+                                <label for="name" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-800 dark:text-white">
+                            </div>
+                            <div class="mb-4">
+                                <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Email</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-800 dark:text-white">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">Message</label>
+                                <textarea id="message" name="message" rows="5" required class="w-full px-4 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 text-gray-800 dark:text-white"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-all duration-300 hover:scale-105 shadow-lg">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-gray-300 py-6">
+            <div class="container mx-auto px-6 text-center">
+                <p>&copy; <span id="year"></span> DevFolio. All Rights Reserved.</p>
+                <p class="text-sm text-gray-500 mt-2">Designed & Built with ❤️</p>
+            </div>
+        </footer>
+
+        <!-- Back to Top Button -->
+        <button id="back-to-top" class="fixed bottom-8 right-8 bg-blue-600 text-white p-3 rounded-full shadow-lg transition-all duration-300 opacity-0 translate-y-4 hover:bg-blue-700 hover:scale-110" aria-label="Go to top">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        </button>
+
+        <!-- Project Modal -->
+        <div id="project-modal" class="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-4 hidden animate-fade-in">
+            <div id="project-modal-content" class="bg-white dark:bg-gray-800 rounded-lg max-w-3xl w-full mx-auto shadow-2xl overflow-hidden animate-zoom-in">
+                <!-- Modal content will be injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- DATA ---
+            const projects = [
+                { id: 1, title: 'E-commerce Platform', category: 'Web App', image: 'https://placehold.co/600x400/3498db/ffffff?text=E-commerce', description: 'A clean and fully customizable e-commerce website template built with pure HTML, CSS, and JavaScript. Includes product listings, shopping cart functionality, and responsive design—ready to adapt for any online store', liveLink: '../pojects/insightboard/index.html' },
+                { id: 3, title: 'Data Visualization Dashboard', category: 'Web App', image: 'https://placehold.co/600x400/9b59b6/ffffff?text=Dashboard', description: 'An interactive dashboard for visualizing complex datasets using D3.js and React. Allows for dynamic filtering and chart generation.', liveLink: '../pojects/flowtrack/index.html' },
+                { id: 4, title: 'Project Management Tool', category: 'Web App', image: 'https://placehold.co/600x400/f1c40f/ffffff?text=Project+Tool', description: 'This is a demo of a full-featured project management tool I can build. It shows the complete UI with interactive elements like task cards, drag-and-drop simulation, modals, and dark mode.', liveLink: '../pojects/taskflow/index.html' },
+                { id: 6, title: 'Company Landing Page', category: 'Website', image: 'https://placehold.co/600x400/1abc9c/ffffff?text=Landing+Page', description: 'A modern and responsive landing page for a tech startup, designed to maximize conversions and user engagement.', liveLink: '../pojects/launchcore-landing/index.html' },
+            ];
+            const skills = ['React', 'Next.js', 'Node.js', 'Tailwind CSS', 'Framer Motion', 'TypeScript', 'CSS', 'HTML', 'JS', 'Figma'];
+            const services = [
+                { title: 'Web Development', description: 'Building responsive, high-performance websites and web applications from scratch.' },
+                { title: 'UI/UX Design', description: 'Creating intuitive and beautiful user interfaces that enhance user experience.' },
+            ];
+            
+            // --- ICONS (as SVG strings) ---
+            const icons = {
+                sun: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
+                moon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`,
+                menu: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`,
+                x: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`,
+            };
+
+            // --- ELEMENT SELECTORS ---
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.getElementById('main-content');
+            const navbar = document.getElementById('navbar');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const themeToggleButtons = [document.getElementById('theme-toggle'), document.getElementById('theme-toggle-mobile')];
+            const backToTopButton = document.getElementById('back-to-top');
+            
+            // --- OBSERVERS (Define early) ---
+            const scrollAnimationObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fade-in-up');
+                        scrollAnimationObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // --- INITIALIZATION ---
+            
+            // Loading screen logic
+            setTimeout(() => {
+                loadingScreen.classList.add('opacity-0');
+                mainContent.classList.remove('opacity-0');
+                setTimeout(() => loadingScreen.style.display = 'none', 500);
+            }, 1500);
+
+            // Set current year in footer
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Populate dynamic content
+            const skillsContainer = document.getElementById('skills-container');
+            skillsContainer.innerHTML = skills.map(skill => `
+                <div class="bg-white dark:bg-gray-700 px-4 py-2 rounded-full shadow-md text-gray-700 dark:text-gray-200 font-medium transition-transform duration-300 hover:scale-110 hover:shadow-lg">
+                    ${skill}
+                </div>
+            `).join('');
+
+            const servicesContainer = document.getElementById('services-container');
+            servicesContainer.innerHTML = services.map(service => `
+                <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-lg shadow-lg transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 scroll-animate">
+                    <h3 class="text-xl font-bold mb-4 text-blue-600 dark:text-blue-400">${service.title}</h3>
+                    <p class="text-gray-600 dark:text-gray-300">${service.description}</p>
+                </div>
+            `).join('');
+            // Observe the newly created service cards
+            servicesContainer.querySelectorAll('.scroll-animate').forEach(el => {
+                scrollAnimationObserver.observe(el);
+            });
+
+
+            // --- TYPEWRITER EFFECT ---
+            const typewriterElement = document.getElementById('typewriter');
+            const textToType = "Hi, I'm a Web Developer.";
+            let typeIndex = 0;
+            function type() {
+                if (typeIndex < textToType.length) {
+                    typewriterElement.innerHTML = `<span class="typewriter-text">${textToType.substring(0, typeIndex + 1)}</span>`;
+                    typeIndex++;
+                    setTimeout(type, 150);
+                } else {
+                     typewriterElement.innerHTML = `<span class="typewriter-text">${textToType}</span>`;
+                }
+            }
+            type();
+
+            // --- THEME TOGGLING ---
+            const updateThemeIcons = () => {
+                const isDark = document.documentElement.classList.contains('dark');
+                themeToggleButtons.forEach(btn => btn.innerHTML = isDark ? icons.sun : icons.moon);
+            };
+            
+            themeToggleButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const isDark = document.documentElement.classList.toggle('dark');
+                    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                    updateThemeIcons();
+                });
+            });
+            updateThemeIcons(); // Initial call
+
+            // --- NAVBAR & MOBILE MENU ---
+            mobileMenuButton.innerHTML = icons.menu;
+            mobileMenuButton.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.toggle('hidden');
+                mobileMenuButton.innerHTML = isOpen ? icons.menu : icons.x;
+            });
+            
+            // Close mobile menu when a link is clicked
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.innerHTML = icons.menu;
+                });
+            });
+
+            // Navbar scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    navbar.classList.add('bg-white/80', 'dark:bg-gray-900/80', 'backdrop-blur-lg', 'shadow-md');
+                } else {
+                    navbar.classList.remove('bg-white/80', 'dark:bg-gray-900/80', 'backdrop-blur-lg', 'shadow-md');
+                }
+            });
+
+            // --- SCROLLSPY (Active nav link highlighting) ---
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const scrollSpyObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('text-blue-500', 'dark:text-blue-400', 'font-semibold');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('text-blue-500', 'dark:text-blue-400', 'font-semibold');
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+            sections.forEach(section => scrollSpyObserver.observe(section));
+
+            // --- PORTFOLIO FILTERING AND MODAL ---
+            const portfolioFilters = document.getElementById('portfolio-filters');
+            const portfolioGrid = document.getElementById('portfolio-grid');
+            const projectModal = document.getElementById('project-modal');
+            const projectModalContent = document.getElementById('project-modal-content');
+            const filters = ['All', 'Web App', 'Website'];
+            let activeFilter = 'All';
+
+            const renderPortfolio = () => {
+                // Render filters
+                portfolioFilters.innerHTML = filters.map(filter => `
+                    <button data-filter="${filter}" class="filter-btn px-4 py-2 rounded-full font-semibold transition-all duration-300 ${activeFilter === filter ? 'bg-blue-600 text-white shadow-lg' : 'bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-blue-100 dark:hover:bg-gray-600'}">
+                        ${filter}
+                    </button>
+                `).join('');
+
+                // Render grid
+                const filteredProjects = activeFilter === 'All' ? projects : projects.filter(p => p.category === activeFilter);
+                portfolioGrid.innerHTML = filteredProjects.map(project => `
+                    <div data-id="${project.id}" class="project-card group relative overflow-hidden rounded-lg shadow-lg cursor-pointer scroll-animate">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-60 object-cover transition-transform duration-500 group-hover:scale-110" loading="lazy" />
+                        <div class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <div class="text-center text-white p-4">
+                                <h3 class="text-xl font-bold mb-2">${project.title}</h3>
+                                <p class="text-sm">${project.category}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Observe the newly created project cards
+                portfolioGrid.querySelectorAll('.scroll-animate').forEach(el => {
+                    scrollAnimationObserver.observe(el);
+                });
+            };
+
+            portfolioFilters.addEventListener('click', (e) => {
+                if (e.target.classList.contains('filter-btn')) {
+                    activeFilter = e.target.dataset.filter;
+                    renderPortfolio();
+                }
+            });
+            
+            const openModal = (projectId) => {
+                const project = projects.find(p => p.id == projectId);
+                if (!project) return;
+                
+                projectModalContent.innerHTML = `
+                    <div class="relative">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-64 object-cover" loading="lazy" />
+                        <button id="modal-close-button" class="absolute top-4 right-4 bg-gray-800/50 text-white rounded-full p-2 hover:bg-gray-800/80 transition-colors" aria-label="Close project details">
+                            ${icons.x}
+                        </button>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-800 dark:text-white">${project.title}</h3>
+                        <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-semibold px-3 py-1 rounded-full mb-4">${project.category}</span>
+                        <p class="text-gray-600 dark:text-gray-300 mb-6">${project.description}</p>
+                        <div class="flex flex-wrap gap-4">
+                            <a href="${project.liveLink}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg> 
+                                Live Demo
+                            </a>
+                        </div>
+                    </div>
+                `;
+                projectModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeModal = () => {
+                projectModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            };
+
+            portfolioGrid.addEventListener('click', (e) => {
+                const card = e.target.closest('.project-card');
+                if (card) {
+                    openModal(card.dataset.id);
+                }
+            });
+
+            projectModal.addEventListener('click', (e) => {
+                if (e.target === projectModal || e.target.closest('#modal-close-button')) {
+                    closeModal();
+                }
+            });
+            
+            renderPortfolio(); // Initial render
+
+            // Observe all other static animated elements
+            document.querySelectorAll('.scroll-animate:not(.project-card):not(.service-card)').forEach(el => {
+                scrollAnimationObserver.observe(el);
+            });
+
+            // --- BACK TO TOP BUTTON ---
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.remove('opacity-0', 'translate-y-4');
+                } else {
+                    backToTopButton.classList.add('opacity-0', 'translate-y-4');
+                }
+            });
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // --- CONTACT FORM ---
+            document.getElementById('contact-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const formData = new FormData(e.target);
+                const data = Object.fromEntries(formData.entries());
+                console.log("Form submitted:", data);
+                alert("Thank you for your message! I'll get back to you soon.");
+                e.target.reset();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaunchCore – Build Faster. Launch Smarter.</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .dark { color-scheme: dark; }
+
+        .typewriter-text::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            from, to { color: transparent }
+            50% { color: inherit }
+        }
+
+        @keyframes scroll-down {
+            0% { transform: translateY(-10px); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(10px); opacity: 0; }
+        }
+        .animate-scroll-down {
+            animation: scroll-down 2.5s ease-in-out infinite;
+        }
+        
+        /* Scroll-triggered animation setup */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .scroll-animate.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+
+    <script>
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-gray-800 dark:text-white">🚀 LaunchCore</a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#features" class="nav-link text-gray-600 dark:text-gray-300 hover:text-indigo-500 dark:hover:text-indigo-400 font-medium">Features</a>
+                <a href="#testimonials" class="nav-link text-gray-600 dark:text-gray-300 hover:text-indigo-500 dark:hover:text-indigo-400 font-medium">Testimonials</a>
+                <a href="#pricing" class="nav-link text-gray-600 dark:text-gray-300 hover:text-indigo-500 dark:hover:text-indigo-400 font-medium">Pricing</a>
+                <a href="#contact" class="nav-link text-gray-600 dark:text-gray-300 hover:text-indigo-500 dark:hover:text-indigo-400 font-medium">Contact</a>
+            </div>
+
+            <div class="flex items-center">
+                 <button id="theme-toggle" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700" aria-label="Toggle dark mode">
+                    </button>
+                <button id="mobile-menu-button" class="md:hidden ml-4 text-gray-800 dark:text-white" aria-label="Open menu">
+                    </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900">
+            <a href="#features" class="mobile-nav-link block text-center py-3 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Features</a>
+            <a href="#testimonials" class="mobile-nav-link block text-center py-3 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Testimonials</a>
+            <a href="#pricing" class="mobile-nav-link block text-center py-3 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Pricing</a>
+            <a href="#contact" class="mobile-nav-link block text-center py-3 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-br from-indigo-100 via-white to-cyan-100 dark:from-gray-900 dark:via-gray-800 dark:to-indigo-900 -z-10"></div>
+            <div class="relative z-10 p-6">
+                <h1 id="typewriter" class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-cyan-500 dark:from-indigo-400 dark:to-cyan-400 h-24"></h1>
+                <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">Everything your team needs to scale your next big idea.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#" class="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 transition-transform duration-300 hover:scale-105">Get Started</a>
+                    <a href="#" class="px-8 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold rounded-lg shadow-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-transform duration-300 hover:scale-105">Watch Demo</a>
+                </div>
+            </div>
+            <div class="absolute bottom-10 left-1/2 -translate-x-1/2">
+                <a href="#trusted-by" aria-label="Scroll down">
+                     <div class="w-6 h-10 border-2 border-gray-400 dark:border-gray-500 rounded-full flex justify-center items-start p-1 animate-scroll-down">
+                        <div class="w-1 h-2 bg-gray-400 dark:bg-gray-500 rounded-full"></div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="trusted-by" class="py-16 bg-gray-50 dark:bg-gray-800">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider mb-8 scroll-animate">Trusted by the world's most innovative teams</h3>
+                <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-8 scroll-animate">
+                    <img src="https://via.placeholder.com/150x50/cccccc/ffffff?text=TechCorp" alt="TechCorp Logo" class="h-8 filter grayscale hover:filter-none transition duration-300" />
+                    <img src="https://via.placeholder.com/150x50/cccccc/ffffff?text=Innovate" alt="Innovate Co Logo" class="h-8 filter grayscale hover:filter-none transition duration-300" />
+                    <img src="https://via.placeholder.com/150x50/cccccc/ffffff?text=Quantum" alt="Quantum Inc Logo" class="h-8 filter grayscale hover:filter-none transition duration-300" />
+                    <img src="https://via.placeholder.com/150x50/cccccc/ffffff?text=NextGen" alt="NextGen Solutions Logo" class="h-8 filter grayscale hover:filter-none transition duration-300" />
+                    <img src="https://via.placeholder.com/150x50/cccccc/ffffff?text=Fusion" alt="Fusion Dynamics Logo" class="h-8 filter grayscale hover:filter-none transition duration-300" />
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 scroll-animate">
+                     <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Everything You Need, Nothing You Don't</h2>
+                     <p class="text-lg text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">A powerful toolkit designed for modern development teams.</p>
+                </div>
+                <div id="features-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-gray-50 dark:bg-gray-800">
+            <div class="container mx-auto px-6">
+                 <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="scroll-animate">
+                        <img src="https://i.ibb.co/yY14pQf/dashboard-preview.png" alt="Product screenshot" class="rounded-lg shadow-2xl" loading="lazy" />
+                    </div>
+                    <div class="scroll-animate">
+                         <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-8">Launch in 3 Simple Steps</h2>
+                         <ul id="steps-list" class="space-y-6">
+                            </ul>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16 scroll-animate">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Loved by Developers Worldwide</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">Don't just take our word for it. Here's what they have to say.</p>
+                </div>
+                <div id="testimonials-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    </div>
+            </div>
+        </section>
+
+        <section id="pricing" class="py-20 bg-gray-50 dark:bg-gray-800">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-16 scroll-animate">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Simple, Transparent Pricing</h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">Choose the plan that's right for your team. No hidden fees.</p>
+                </div>
+                <div class="grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                    <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 scroll-animate">
+                        <h3 class="text-2xl font-bold text-center mb-2">Hobby</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-center mb-6">For individuals & side projects</p>
+                        <p class="text-5xl font-extrabold text-center mb-6">$15<span class="text-lg font-medium text-gray-500">/mo</span></p>
+                        <ul class="space-y-4 text-gray-600 dark:text-gray-300 mb-8">
+                            <li class="flex items-center"><i data-feather="check" class="w-5 h-5 text-green-500 mr-2"></i>5 Projects</li>
+                            <li class="flex items-center"><i data-feather="check" class="w-5 h-5 text-green-500 mr-2"></i>Basic Analytics</li>
+                            <li class="flex items-center"><i data-feather="check" class="w-5 h-5 text-green-500 mr-2"></i>Community Support</li>
+                        </ul>
+                        <a href="#" class="block w-full text-center px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">Choose Plan</a>
+                    </div>
+                    <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-2xl border-2 border-indigo-500 relative transform scale-105 scroll-animate">
+                         <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</span>
+                        <h3 class="text-2xl font-bold text-center mb-2">Pro</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-center mb-6">For growing startups & teams</p>
+                        <p class="text-5xl font-extrabold text-center mb-6">$49<span class="text-lg font-medium text-gray-500">/mo</span></p>
+                        <ul class="space-y-4 text-gray-600 dark:text-gray-300 mb-8">
+                            <li class="flex items-center"><i data-feather="check" class="w-5 h-5 text-green-500 mr-2"></i>Unlimited Projects</li>
+                            <li class="flex items-center"><i data-feather="check" class="w-5 h-5 text-green-500 mr-2"></i>Advanced Analytics</li>
+                            <li class="flex items-center"><i data-feather="check" class="w-5 h-5 text-green-500 mr-2"></i>Priority Email Support</li>
+                            <li class="flex items-center"><i data-feather="check" class="w-5 h-5 text-green-500 mr-2"></i>Team Collaboration</li>
+                        </ul>
+                        <a href="#" class="block w-full text-center px-6 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition">Get Started</a>
+                    </div>
+                     <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 scroll-animate">
+                        <h3 class="text-2xl font-bold text-center mb-2">Enterprise</h3>
+                        <p class="text-gray-500 dark:text-gray-400 text-center mb-6">For large-scale applications</p>
+                        <p class="text-5xl font-extrabold text-center mb-6">Custom</p>
+                         <ul class="space-y-4 text-gray-600 dark:text-gray-300 mb-8">
+                            <li class="flex items-center"><i data-feather="check" class="w-5 h-5 text-green-500 mr-2"></i>Dedicated Infrastructure</li>
+                            <li class="flex items-center"><i data-feather="check" class="w-5 h-5 text-green-500 mr-2"></i>Custom Integrations</li>
+                            <li class="flex items-center"><i data-feather="check" class="w-5 h-5 text-green-500 mr-2"></i>24/7 Phone Support</li>
+                        </ul>
+                        <a href="#" class="block w-full text-center px-6 py-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="bg-gray-100 dark:bg-gray-800 rounded-lg p-8 md:p-12 lg:p-16 scroll-animate">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Ready to grow your startup?</h2>
+                            <p class="text-lg text-gray-600 dark:text-gray-400 mt-4 mb-8">Start your free trial today. No credit card required.</p>
+                            <a href="#" class="inline-block px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg shadow-lg hover:bg-indigo-700 transition-transform duration-300 hover:scale-105">Get Started Free</a>
+                        </div>
+                        <form id="contact-form">
+                            <div class="space-y-4">
+                                <input type="text" placeholder="Your Name" class="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                                <input type="email" placeholder="Your Email" class="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500">
+                                <textarea rows="4" placeholder="Your Message" class="w-full px-4 py-3 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                                <button type="submit" class="w-full px-6 py-3 bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 font-semibold rounded-lg hover:bg-gray-900 dark:hover:bg-white transition">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400">
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid md:grid-cols-4 gap-8">
+                 <div>
+                    <h3 class="text-lg font-bold text-white mb-4">🚀 LaunchCore</h3>
+                    <p class="text-sm">Build Faster. Launch Smarter.</p>
+                </div>
+                 <div>
+                    <h4 class="font-semibold text-white mb-4">Product</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#features" class="hover:text-indigo-400">Features</a></li>
+                        <li><a href="#pricing" class="hover:text-indigo-400">Pricing</a></li>
+                        <li><a href="#" class="hover:text-indigo-400">Docs</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h4 class="font-semibold text-white mb-4">Company</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-indigo-400">About Us</a></li>
+                        <li><a href="#" class="hover:text-indigo-400">Careers</a></li>
+                        <li><a href="#contact" class="hover:text-indigo-400">Contact</a></li>
+                    </ul>
+                </div>
+                 <div>
+                    <h4 class="font-semibold text-white mb-4">Connect</h4>
+                    <div id="social-icons" class="flex space-x-4">
+                        </div>
+                </div>
+            </div>
+            <div class="mt-12 border-t border-gray-700 pt-8 text-center text-sm">
+                <p>&copy; <span id="year"></span> LaunchCore. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- DATA ---
+            const features = [
+                { icon: 'zap', title: 'Fast & Secure', description: 'Built on next-gen infrastructure for top speed and security.' },
+                { icon: 'users', title: 'Real-Time Collaboration', description: 'Work with your entire team on a single, unified platform.' },
+                { icon: 'code', title: 'Easy Integration', description: 'Connect to your favorite tools with our powerful and flexible API.' }
+            ];
+            const steps = [
+                { number: '01', title: 'Plan', description: 'Outline your project roadmap and define key milestones with our intuitive planning tools.' },
+                { number: '02', title: 'Collaborate', description: 'Invite your team, assign tasks, and track progress in real-time to stay perfectly in sync.' },
+                { number: '03', title: 'Launch', description: 'Deploy your application with a single click and monitor performance from our dashboard.' }
+            ];
+            const testimonials = [
+                { name: 'Sarah L.', role: 'CEO, Innovate Co', quote: 'LaunchCore has been a game-changer for our workflow. We’re shipping features twice as fast!', avatar: 'https://i.pravatar.cc/100?u=a042581f4e29026704d' },
+                { name: 'Mike R.', role: 'Lead Developer, TechCorp', quote: 'The best platform for team collaboration I’ve ever used. The integration with our existing tools was seamless.', avatar: 'https://i.pravatar.cc/100?u=a042581f4e29026705d' },
+                { name: 'Jessica P.', role: 'Founder, NextGen', quote: 'As a startup, speed is everything. LaunchCore allowed us to go from idea to launch in record time.', avatar: 'https://i.pravatar.cc/100?u=a042581f4e29026706d' }
+            ];
+            const socialLinks = {
+                twitter: '#',
+                linkedin: '#',
+                github: '#'
+            };
+            
+            // --- ICON SVGs ---
+            const icons = {
+                sun: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
+                moon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`,
+                menu: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`,
+                x: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`,
+            };
+            
+            // --- INJECT DYNAMIC CONTENT ---
+            const featuresGrid = document.getElementById('features-grid');
+            featuresGrid.innerHTML = features.map(f => `
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 scroll-animate">
+                    <div class="bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 rounded-full w-12 h-12 flex items-center justify-center mb-4">
+                        <i data-feather="${f.icon}"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">${f.title}</h3>
+                    <p class="text-gray-600 dark:text-gray-400">${f.description}</p>
+                </div>
+            `).join('');
+
+            const stepsList = document.getElementById('steps-list');
+            stepsList.innerHTML = steps.map(s => `
+                <li class="flex items-start">
+                    <div class="flex-shrink-0 text-3xl font-extrabold text-indigo-200 dark:text-indigo-800 mr-4">${s.number}</div>
+                    <div>
+                        <h4 class="text-xl font-bold text-gray-900 dark:text-white mb-1">${s.title}</h4>
+                        <p class="text-gray-600 dark:text-gray-400">${s.description}</p>
+                    </div>
+                </li>
+            `).join('');
+
+            const testimonialsGrid = document.getElementById('testimonials-grid');
+            testimonialsGrid.innerHTML = testimonials.map(t => `
+                 <div class="bg-gray-50 dark:bg-gray-800 p-8 rounded-lg scroll-animate">
+                    <p class="text-gray-600 dark:text-gray-300 italic mb-6">"${t.quote}"</p>
+                    <div class="flex items-center">
+                        <img src="${t.avatar}" alt="${t.name}" class="w-12 h-12 rounded-full mr-4" loading="lazy" />
+                        <div>
+                            <p class="font-bold text-gray-900 dark:text-white">${t.name}</p>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">${t.role}</p>
+                        </div>
+                    </div>
+                 </div>
+            `).join('');
+
+            const socialIconsContainer = document.getElementById('social-icons');
+            socialIconsContainer.innerHTML = Object.entries(socialLinks).map(([key, value]) => `
+                <a href="${value}" class="text-gray-400 hover:text-indigo-400"><i data-feather="${key}" class="w-6 h-6"></i></a>
+            `).join('');
+
+            feather.replace(); // Initialize Feather Icons
+
+            // Set current year
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // --- TYPEWRITER EFFECT ---
+            const typewriterElement = document.getElementById('typewriter');
+            const textToType = "Build Faster. Launch Smarter.";
+            let typeIndex = 0;
+            function type() {
+                if (typeIndex < textToType.length) {
+                    typewriterElement.innerHTML = `<span class="typewriter-text">${textToType.substring(0, typeIndex + 1)}</span>`;
+                    typeIndex++;
+                    setTimeout(type, 100);
+                } else {
+                    typewriterElement.innerHTML = `<span class="typewriter-text">${textToType}</span>`;
+                }
+            }
+            setTimeout(type, 500); // Start typing after a short delay
+
+            // --- THEME TOGGLE ---
+            const themeToggle = document.getElementById('theme-toggle');
+            const updateThemeIcons = () => {
+                const isDark = document.documentElement.classList.contains('dark');
+                themeToggle.innerHTML = isDark ? icons.sun : icons.moon;
+            };
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.documentElement.classList.toggle('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                updateThemeIcons();
+            });
+            updateThemeIcons();
+
+            // --- NAVBAR & MOBILE MENU ---
+            const navbar = document.getElementById('navbar');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            mobileMenuButton.innerHTML = icons.menu;
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('bg-white/80', 'dark:bg-gray-900/80', 'backdrop-blur-lg', 'shadow-md');
+                } else {
+                    navbar.classList.remove('bg-white/80', 'dark:bg-gray-900/80', 'backdrop-blur-lg', 'shadow-md');
+                }
+            });
+
+            mobileMenuButton.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.toggle('hidden');
+                mobileMenuButton.innerHTML = isOpen ? icons.menu : icons.x;
+            });
+            
+            document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.innerHTML = icons.menu;
+                });
+            });
+
+            // --- SCROLL ANIMATIONS ---
+            const scrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        scrollObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.scroll-animate').forEach(el => {
+                scrollObserver.observe(el);
+            });
+            
+             // --- CONTACT FORM ---
+            document.getElementById('contact-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert("Thank you for your message! We'll be in touch soon.");
+                e.target.reset();
+            });
+
+        });
+    </script>
+</body>
+</html>

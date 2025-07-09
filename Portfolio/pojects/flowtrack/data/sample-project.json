@@ -1,0 +1,23 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "name": "Website Redesign",
+      "tasks": {
+        "todo": [
+          { "id": "task-1", "title": "Wireframe Homepage", "description": "Create detailed wireframes for the new homepage layout.", "dueDate": "2025-08-15", "assignedTo": "Alex", "labels": ["UI/UX"] },
+          { "id": "task-2", "title": "Setup Project Repository", "description": "Initialize Git repo and setup basic project structure.", "dueDate": "2025-08-10", "assignedTo": "Sam", "labels": ["Dev"] }
+        ],
+        "inprogress": [
+          { "id": "task-3", "title": "Design Logo Concepts", "description": "Develop three initial logo concepts for review.", "dueDate": "2025-08-12", "assignedTo": "Alex", "labels": ["Branding", "High Priority"] }
+        ],
+        "review": [
+          { "id": "task-4", "title": "User Persona Research", "description": "Finalize research on target user personas.", "dueDate": "2025-08-09", "assignedTo": "Casey", "labels": ["Research"] }
+        ],
+        "done": [
+          { "id": "task-5", "title": "Kick-off Meeting", "description": "Initial meeting with stakeholders to define project scope.", "dueDate": "2025-08-01", "assignedTo": "Sam", "labels": [] }
+        ]
+      }
+    }
+  ]
+}

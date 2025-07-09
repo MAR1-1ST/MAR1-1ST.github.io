@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - InsightBoard</title>
+    <link rel="stylesheet" href="../insightboard/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-chart-pie logo-icon"></i>
+                <h1>InsightBoard</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="reports.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="data-upload.html" class="nav-item">
+                    <i class="fas fa-upload"></i>
+                    <span>Data Upload</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="help.html" class="nav-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help / AI Assistant</span>
+                </a>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            <header class="top-navbar">
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="navbar-right">
+                    <div class="theme-switcher" id="theme-switcher">
+                        <i id="moon-icon" class="fas fa-moon"></i>
+                        <i id="sun-icon" class="fas fa-sun" style="display: none;"></i>
+                    </div>
+                    <div class="profile">
+                        <img src="https://i.pravatar.cc/40" alt="Profile Picture">
+                        <span>Alex Johnson</span>
+                    </div>
+                </div>
+            </header>
+
+<main class="page-content">
+    <div class="page-header">
+        <h2>Deeper Analytics</h2>
+        <p>A granular breakdown of your traffic and user behavior.</p>
+    </div>
+    <div class="chart-grid">
+        <div class="chart-container" style="height: 400px;">
+            <h3>Traffic Sources</h3>
+            <canvas id="trafficChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <h3>User Behavior</h3>
+            <div class="kpi-grid">
+                <div class="kpi-card"><div class="kpi-info"><h3>Avg. Time on Site</h3><p>3m 45s</p></div></div>
+                <div class="kpi-card"><div class="kpi-info"><h3>Bounce Rate</h3><p>25.8%</p></div></div>
+            </div>
+             <h3>Device Distribution</h3>
+             <div class="kpi-grid">
+                 <div class="kpi-card"><div class="kpi-info"><h3>Desktop</h3><p>65%</p></div></div>
+                 <div class="kpi-card"><div class="kpi-info"><h3>Mobile</h3><p>35%</p></div></div>
+             </div>
+        </div>
+    </div>
+</main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../insightboard/js/main.js"></script>
+    <script src="../insightboard/js/charts.js"></script>
+</body>
+</html>

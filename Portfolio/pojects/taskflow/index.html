@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TaskFlow</title>
+    <link rel="stylesheet" href="../taskflow/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1a2a1920a2.js" crossorigin="anonymous"></script>
+</head>
+<body data-theme="light">
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-stream logo"></i>
+                <h1>TaskFlow</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item active"><i class="fas fa-home"></i> Home</a>
+                <a href="board.html" class="nav-item"><i class="fas fa-th-large"></i> Projects</a>
+                <a href="settings.html" class="nav-item"><i class="fas fa-cog"></i> Settings</a>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            <header class="navbar">
+                <h2 class="page-title">Dashboard</h2>
+                <div class="navbar-right">
+                    <div class="notification-dropdown">
+                         <i class="fas fa-bell"></i>
+                         <div class="notification-menu">
+                             <div class="notification-item">Casey assigned you a task.</div>
+                             <div class="notification-item">Website Redesign is due tomorrow.</div>
+                         </div>
+                    </div>
+                    <img src="https://i.pravatar.cc/40?u=user1" alt="User Avatar" class="user-avatar">
+                </div>
+            </header>
+
+            <main class="page-content">
+                <div class="page-actions">
+                    <h3>My Projects</h3>
+                    <button class="btn btn-primary" id="new-project-btn"><i class="fas fa-plus"></i> New Project</button>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h4>Website Redesign</h4>
+                        <p>12/20 Tasks Completed</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 60%;"></div>
+                        </div>
+                        <a href="board.html" class="btn">Open</a>
+                    </div>
+                     <div class="project-card">
+                        <h4>Mobile App Launch</h4>
+                        <p>45/50 Tasks Completed</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 90%;"></div>
+                        </div>
+                        <a href="board.html" class="btn">Open</a>
+                    </div>
+                     <div class="project-card">
+                        <h4>Q4 Marketing Plan</h4>
+                        <p>5/30 Tasks Completed</p>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 15%;"></div>
+                        </div>
+                        <a href="board.html" class="btn">Open</a>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="modal" id="project-modal">
+        <div class="modal-content">
+            <span class="close-modal-btn">&times;</span>
+            <h3>Create New Project</h3>
+            <p>This is a demonstration modal. In a real app, you would have a form here to create a new project.</p>
+        </div>
+    </div>
+    
+    <script src="../taskflow/js/demo.js"></script>
+</body>
+</html>

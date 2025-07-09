@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - InsightBoard</title>
+    <link rel="stylesheet" href="../insightboard/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-chart-pie logo-icon"></i>
+                <h1>InsightBoard</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="reports.html" class="nav-item">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Reports</span>
+                </a>
+                <a href="data-upload.html" class="nav-item">
+                    <i class="fas fa-upload"></i>
+                    <span>Data Upload</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="help.html" class="nav-item">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help / AI Assistant</span>
+                </a>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            <header class="top-navbar">
+                <button class="menu-toggle" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="navbar-right">
+                    <div class="theme-switcher" id="theme-switcher">
+                        <i id="moon-icon" class="fas fa-moon"></i>
+                        <i id="sun-icon" class="fas fa-sun" style="display: none;"></i>
+                    </div>
+                    <div class="profile">
+                        <img src="https://i.pravatar.cc/40" alt="Profile Picture">
+                        <span>Alex Johnson</span>
+                    </div>
+                </div>
+            </header>
+
+<main class="page-content">
+    <div class="page-header">
+        <h2>Settings</h2>
+        <p>Manage your preferences and API keys.</p>
+    </div>
+    <div class="form-section">
+        <h3>Preferences</h3>
+        <div class="form-group">
+            <label>Theme</label>
+            <p>Toggle light/dark mode using the <i class="fas fa-moon"></i>/<i class="fas fa-sun"></i> icon in the top bar.</p>
+        </div>
+        <div class="form-group">
+            <label for="language">Language</label>
+            <select id="language">
+                <option>English (United States)</option>
+                <option>Spanish</option>
+                <option>French</option>
+            </select>
+        </div>
+        <hr style="border: 1px solid var(--border-light); margin: 2rem 0;">
+        <h3>API Integration</h3>
+        <div class="form-group">
+            <label for="api-key">OpenAI API Key</label>
+            <input type="password" id="api-key" placeholder="sk-...">
+            <p style="font-size: 0.9rem; color: var(--secondary-color); margin-top: 0.5rem;">Your key is stored securely and used for generating insights.</p>
+        </div>
+        <button class="btn btn-primary">Save Settings</button>
+    </div>
+</main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../insightboard/js/main.js"></script>
+    <script src="../insightboard/js/charts.js"></script>
+</body>
+</html>
